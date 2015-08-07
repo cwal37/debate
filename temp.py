@@ -15,7 +15,7 @@ from nltk.corpus import stopwords
 plt.clf()
 plt.close()
 
-plt.style.use('bmh')
+plt.style.use('ggplot')
 
 path = 'data_nospaces.txt'
 raw = open(path, 'rU').read()
@@ -90,3 +90,10 @@ plt.xticks(ind, xlabels, rotation = 45)
 plt.savefig('words_25.png', dpi=400)
 plt.clf()
 plt.close()
+
+
+contenders = ['carson', 'bush', 'trump', 'rubio',  'huckabee', 
+'christie', 'kasich', 'cruz', 'walker', 'paul']
+
+
+
