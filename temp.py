@@ -106,12 +106,28 @@ df_names.columns = ['name', 'count']
 contenders = ['carson', 'bush', 'trump', 'rubio',  'huckabee', 
 'christie', 'kasich', 'cruz', 'walker', 'paul']
 
-policies = ['immigration', 'immigrants', 'healthcare', 'insurance',
-            'energy', 'environment', 'climate', 'border', 'education', 'tax', 'taxes',
-            'iran', 'nuclear', 'women', 'parenthood']
+policies = ['immigration', 'immigrants', 'obamacare', 'healthcare', 'insurance', 'medicare', 'medicaid',
+            'energy', 'environment', 'climate', 'research', 'border', 'education', 'tax', 'taxes',
+            'iran', 'nuclear', 'military', 'defense', 'women', 'parenthood', 'abortion', 'nasa']
             
 policy_count = df_refinement(df, policies)
+policy_df = pd.DataFrame(policies)
+policy_df['pc'] = policy_count
+policy_df.columns = ['word', 'count']
             
+policy_df = policy_df.sort('count', ascending = False)
+            
+ind =  range(len(policy_df['count']))
+xlabels = list(policy_df['word'])
+plt.figure(figsize=(9,6))
+plt.xlim(-0.5,23)
+plt.bar(ind, policy_df['count'], align = 'center')
+plt.title('Policy Word Use, GOP Primary Debate #1')
+plt.xticks(ind, xlabels, rotation = 75)
+plt.gcf().subplots_adjust(bottom=0.18)
+plt.savefig('policies.png', dpi=400)
+plt.show()
+
 
 
 
