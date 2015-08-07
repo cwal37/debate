@@ -43,18 +43,26 @@ for val in problems:
 df.to_csv('slightly_clean_yo.csv')
 
 
+def df_refinement(df, words):
+    word_count = []
+    for word in words:
+        count_row = df[df['word'] == word]
+        count  = count_row.iloc[0]['count']
+        word_count.append(count)
+    return(word_count)
+    
+        
+
 df_15 = df[df['count'] > 15]
 df2 = df[df['count'] > 25]
 
 names = ['carson', 'bush', 'trump', 'rubio', 'wallace',  'hillary','huckabee', 
 'christie', 'kasich', 'cruz','megyn', 'baier','obama', 'kelly', 'clinton',  
 'walker', 'paul']
-name_count = []
-for name in names:
-    count_row = df_15[df_15['word'] == name]
-    count  = count_row.iloc[0]['count']
-    name_count.append(count)
-    
+
+name_count = df_refinement(df_15, names)
+
+
 
 df_names = pd.DataFrame(names)
 
@@ -66,34 +74,42 @@ df_names.columns = ['name', 'count']
 
 
 
-ind =  range(len(name_count))
-#print xlabels
-plt.bar(ind, name_count)
-plt.title('Names Mentioned at least 15 times')
-plt.xticks(ind, names, rotation = 45)
-plt.savefig('names.png', dpi=400)
-plt.clf()
-plt.close()
-
-
-
-counts = list(df2['count'])
-xlabels = list(df2['word'])
-#plt.xlim(0,122)
-
-ind =  range(len(counts))
-#print xlabels
-plt.figure(figsize=(20,10))
-plt.bar(ind, counts)
-plt.title('Words Used at Least 25 Times')
-plt.xticks(ind, xlabels, rotation = 45)
-plt.savefig('words_25.png', dpi=400)
-plt.clf()
-plt.close()
+#ind =  range(len(name_count))
+##print xlabels
+#plt.bar(ind, name_count)
+#plt.title('Names Mentioned at least 15 times')
+#plt.xticks(ind, names, rotation = 45)
+#plt.savefig('names.png', dpi=400)
+#plt.clf()
+#plt.close()
+#
+#
+#
+#counts = list(df2['count'])
+#xlabels = list(df2['word'])
+##plt.xlim(0,122)
+#
+#ind =  range(len(counts))
+##print xlabels
+#plt.figure(figsize=(20,10))
+#plt.bar(ind, counts)
+#plt.title('Words Used at Least 25 Times')
+#plt.xticks(ind, xlabels, rotation = 45)
+#plt.savefig('words_25.png', dpi=400)
+#plt.clf()
+#plt.close()
 
 
 contenders = ['carson', 'bush', 'trump', 'rubio',  'huckabee', 
 'christie', 'kasich', 'cruz', 'walker', 'paul']
+
+policies = ['immigration', 'immigrant', 'healthcare', 'insurance',
+            'energy', 'environment', 'climate', 'border', 'education', 'tax', 'taxes',
+            'iran', 'nuclear', 'women', 'parenthood']
+            
+policy_count = df_refinement(df, policies)
+            
+
 
 
 
