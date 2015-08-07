@@ -47,7 +47,10 @@ def df_refinement(df, words):
     word_count = []
     for word in words:
         count_row = df[df['word'] == word]
-        count  = count_row.iloc[0]['count']
+        if count_row.empty:
+            count = 0
+        else:
+            count  = count_row.iloc[0]['count']
         word_count.append(count)
     return(word_count)
     
@@ -103,7 +106,7 @@ df_names.columns = ['name', 'count']
 contenders = ['carson', 'bush', 'trump', 'rubio',  'huckabee', 
 'christie', 'kasich', 'cruz', 'walker', 'paul']
 
-policies = ['immigration', 'immigrant', 'healthcare', 'insurance',
+policies = ['immigration', 'immigrants', 'healthcare', 'insurance',
             'energy', 'environment', 'climate', 'border', 'education', 'tax', 'taxes',
             'iran', 'nuclear', 'women', 'parenthood']
             
